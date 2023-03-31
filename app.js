@@ -5,6 +5,9 @@ const singer = document.querySelector("#music-details .singer");
 const play = document.querySelector("#controls #play");
 const prev = document.querySelector("#controls #prev");
 const next = document.querySelector("#controls #next");
+const progressBar=document.querySelector('#progress-bar');
+const duration=document.querySelector('#duration');
+const currentTime=document.querySelector('#current-time');
 
 const player = new MusicPlayer(musicList);
 
@@ -58,3 +61,23 @@ function playMusic() {
     play.classList = "fa-solid fa-pause";
     audio.play();
 }
+
+
+calculateTime = (toplamSaniye) =>{
+    const dakika=Math.floor(toplamSaniye / 60);
+    const saniye=Math.floor(toplamSaniye % 60);
+
+    const güncellenenSaniye=saniye < 10 ? `0${saniye}`:  `${saniye}`;
+    const sonuc=`${dakika}:${güncellenenSaniye} `;
+    return sonuc;
+}
+
+audio.addEventListener('loadedmetadata', () =>{
+    duration.textContent=calculateTime(audio.duration);
+    progressBar.max =Math.floor(audio.duration);
+});
+
+audio.addEventListener('timeupdate', () =>{
+    progressBar.value=Math.floor(audio.currentTime);
+    currentTime.textContent=calculateTime(progressBar.value);
+})
