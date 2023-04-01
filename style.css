@@ -23,7 +23,9 @@
    margin-bottom: 20px; 
 }
 
-#progress .times{
+#progress .times,
+#controls
+{
     display: flex;
     justify-content: space-between;
     align-items: center;

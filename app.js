@@ -8,6 +8,8 @@ const next = document.querySelector("#controls #next");
 const progressBar=document.querySelector('#progress-bar');
 const duration=document.querySelector('#duration');
 const currentTime=document.querySelector('#current-time');
+const volume=document.querySelector('#volume');
+const volumeBar=document.querySelector('#volume-bar');
 
 const player = new MusicPlayer(musicList);
 
@@ -28,35 +30,31 @@ play.addEventListener("click", () => {
     isMusicPlay ? pauseMusic() : playMusic();
 });
 
-prev.addEventListener("click", () => {
-    prevMusic();
-});
+prev.addEventListener("click", () => { prevMusic(); });
 
-next.addEventListener("click", () => {
-    nextMusic();
-});
+next.addEventListener("click", () => {nextMusic(); });
 
-function prevMusic() {
+const prevMusic = () => {
     player.prev();
     let music = player.getMusic();
     displayMusic(music);
     playMusic();
 }
 
-function nextMusic() {
+const nextMusic = () => {
     player.next();
     let music = player.getMusic();
     displayMusic(music);
     playMusic();
 }
 
-function pauseMusic() {
+const pauseMusic = () => {
     container.classList.remove("playing");
     play.classList = "fa-solid fa-play";
     audio.pause();
 }
 
-function playMusic() {
+const  playMusic = () => {
     container.classList.add("playing");
     play.classList = "fa-solid fa-pause";
     audio.play();
@@ -86,4 +84,41 @@ progressBar.addEventListener('input', () =>{
     currentTime.textContent=calculateTime(progressBar.value);
 
     audio.currentTime=progressBar.value;
+});
+
+let sesDurumu='sesli';
+
+volumeBar.addEventListener('input', (e) =>{
+    const value=e.target.value;
+    audio.volume=value / 100;
+    if(value==0){
+        audio.muted=true;
+        sesDurumu='sessiz'
+        volume.classList='fa-solid  fa-volume-xmark';
+        volumeBar.value=0; 
+    }
+    else{
+        audio.muted=false;
+        sesDurumu='sesli';
+        volume.classList='fa-solid fa-volume-high';
+    }
+
+
+})
+
+volume.addEventListener('click', () =>{
+    if(sesDurumu==='sesli'){
+        audio.muted=true;
+        sesDurumu='sessiz'
+        volume.classList='fa-solid  fa-volume-xmark';
+        volumeBar.value=0;
+    }else{
+        audio.muted=false;
+        sesDurumu='sesli';
+        volume.classList='fa-solid fa-volume-high';
+        volumeBar.value=100;
+
+    }
+
+    
 })
