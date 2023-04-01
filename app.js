@@ -80,4 +80,10 @@ audio.addEventListener('loadedmetadata', () =>{
 audio.addEventListener('timeupdate', () =>{
     progressBar.value=Math.floor(audio.currentTime);
     currentTime.textContent=calculateTime(progressBar.value);
+});
+
+progressBar.addEventListener('input', () =>{
+    currentTime.textContent=calculateTime(progressBar.value);
+
+    audio.currentTime=progressBar.value;
 })
