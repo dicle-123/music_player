@@ -7,4 +7,4 @@ make project with javascript
 
 
 ##
-music.js adlı bir dosya ekledim ve bu dosya içinde müzik ile alakalı bilgileri ekledim ve daha sonra bu dosyaları yöneticek olan bir önceki veya sonraki müziğe geçicek olan metotları içeren bir musicplayer.js diye bir dosya oluşturdum, bunları işlevsel hale getiren yani kullanan dosyamızda app.js dosyasıdır.
+A file named music.js has been added and information related to music has been added to this file. Another file named Musicplayer.js has been added in this file, which will manage the information related to the music, and move on to the previous and next music. The file that makes the information functional, that is, uses it, is app.js.
